@@ -1,0 +1,25 @@
+{% extends 'base.html' %}
+
+{% block body %}
+
+<h3>Editar rol usuario</h3>
+
+<form method="POST">
+
+<select class="form-control mb-2" name="role">
+
+<option value="user">Usuario</option>
+
+<option value="admin">Administrador</option>
+
+</select>
+
+<button class="btn btn-warning">
+
+Actualizar rol
+
+</button>
+
+</form>
+
+{% endblock %}

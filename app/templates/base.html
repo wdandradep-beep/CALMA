@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html>
+<head>
+<link rel='stylesheet' href='https://bootswatch.com/5/vapor/bootstrap.min.css'>
+<link rel="stylesheet" href="{{url_for('static',filename='css/main.css')}}">
+</head>
+<body>
+<nav class='navbar navbar-dark bg-dark px-3'>
+<a class='navbar-brand' href='/'>CALMA</a>
+<div>
+<a class='btn btn-sm btn-outline-light' href='/materias'>Materias</a>
+<a class='btn btn-sm btn-outline-light' href='/actividades'>Actividades</a>
+{% if session.get('role')=='admin' %}
+<a class='btn btn-sm btn-outline-warning' href='/users'>Usuarios</a>
+{% endif %}
+<a class='btn btn-sm btn-outline-danger' href='/logout'>Salir</a>
+</div>
+</nav>
+<div class='container mt-4'>
+{% block body %}{% endblock %}
+</div>
+<script>
+
+document.querySelectorAll('.color-box').forEach(box=>{
+box.style.background=box.dataset.color;
+});
+
+</script>
+</body>
+</html>

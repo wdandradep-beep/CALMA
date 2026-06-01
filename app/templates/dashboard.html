@@ -1,0 +1,72 @@
+{% extends 'base.html' %}
+
+{% block body %}
+
+<h2 class="mb-4">Dashboard</h2>
+
+<div class="row">
+
+<div class="col-md-3">
+<div class="card text-center p-3 shadow bg-dark text-white">
+<h5>Total</h5>
+<h2>{{total}}</h2>
+</div>
+</div>
+
+<div class="col-md-3">
+<div class="card text-center p-3 shadow bg-success text-white">
+<h5>Completadas</h5>
+<h2>{{completadas}}</h2>
+</div>
+</div>
+
+<div class="col-md-3">
+<div class="card text-center p-3 shadow bg-warning text-dark">
+<h5>Pendientes</h5>
+<h2>{{pendientes}}</h2>
+</div>
+</div>
+
+<div class="col-md-3">
+<div class="card text-center p-3 shadow bg-danger text-white">
+<h5>Vencidas</h5>
+<h2>{{vencidas}}</h2>
+</div>
+</div>
+
+</div>
+
+<!-- GANTT -->
+
+<h4 class="mt-5">Actividades (Gantt)</h4>
+
+{% if gantt %}
+
+{% for g in gantt %}
+
+<div class="mb-3">
+
+<b>{{g.nombre}}</b>
+
+<div class="gantt-bar-container">
+
+<div class="gantt-bar"
+style="
+margin-left: {{ g.offset * 150 }}px;
+width: {{ g.duracion * 340 }}px;
+">
+</div>
+
+</div>
+
+</div>
+
+{% endfor %}
+
+{% else %}
+
+<p class="text-muted">No hay actividades</p>
+
+{% endif %}
+
+{% endblock %}

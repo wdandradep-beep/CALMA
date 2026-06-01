@@ -1,0 +1,82 @@
+{% extends 'base.html' %}
+
+{% block body %}
+
+<h3>Materias</h3>
+
+{% if session.get('role')=='admin' %}
+
+<form method="POST">
+
+<input class="form-control mb-2"
+name="nombre"
+placeholder="Nombre">
+
+<input class="form-control mb-2"
+name="descripcion"
+placeholder="Nombre del profesor">
+
+<input class="form-control mb-2"
+type="color"
+name="color">
+
+<button class="btn btn-primary">
+Crear
+</button>
+
+</form>
+
+{% endif %}
+
+<table class="table mt-3">
+
+<tr>
+
+<th>Nombre</th>
+<th>Descripción</th>
+<th>Color</th>
+<th>Acciones</th>
+
+</tr>
+
+{% for m in materias %}
+
+<tr>
+
+<td>{{m[1]}}</td>
+
+<td>{{m[2]}}</td>
+
+<td>
+
+<div class="color-box"
+data-color="{{m[3]}}">
+</div>
+</td>
+
+<td>
+
+<a href="/edit_materia/{{m[0]}}" 
+class="btn btn-warning btn-sm me-1">
+
+Editar
+
+</a>
+
+<a href="/delete_materia/{{m[0]}}" 
+class="btn btn-danger btn-sm"
+onclick="return confirm('¿Eliminar materia?')">
+
+Eliminar
+
+</a>
+
+</td>
+
+</tr>
+
+{% endfor %}
+
+</table>
+
+{% endblock %}

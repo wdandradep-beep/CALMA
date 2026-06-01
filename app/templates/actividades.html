@@ -1,0 +1,145 @@
+{% extends 'base.html' %}
+{% block body %}
+
+<h3>Actividades</h3>
+
+<form method='POST'>
+
+<input class='form-control mb-2'
+name='nombre'
+placeholder='Actividad'>
+
+<input class='form-control mb-2'
+name='descripcion'
+placeholder='Descripción'>
+
+<div class='d-flex gap-2 mb-2'>
+
+<select class='form-select' name='materia'>
+
+{% for m in materias %}
+
+<option value='{{m[0]}}'>{{m[1]}}</option>
+
+{% endfor %}
+
+</select>
+
+<select class='form-select' name='estado'>
+
+<option>Pendiente</option>
+<option>En progreso</option>
+<option>Completado</option>
+
+</select>
+
+<select class='form-select' name='prioridad'>
+
+<option>Alta</option>
+<option>Media</option>
+<option>Baja</option>
+
+</select>
+
+<input type='range'
+min='0'
+max='100'
+name='progreso'>
+
+<input type='date'
+name='fecha_inicio'>
+
+<input type='date'
+name='fecha_entrega'>
+
+<button class='btn btn-primary'>
+
+Crear
+
+</button>
+
+</div>
+
+</form>
+
+<table class="table">
+
+<tr>
+
+<th>Actividad</th>
+<th>Materia</th>
+<th>Estado</th>
+<th>Prioridad</th>
+<th>Fecha de entrega</th>
+<th>Acciones</th>
+
+</tr>
+
+{% for a in actividades %}
+
+<tr>
+
+<td>
+
+<a href="{{url_for('main.actividad_detalle',id=a[0])}}">
+
+{{a[1]}}
+
+</a>
+
+</td>
+<td>{{a[3]}}</td>
+<td>
+
+{% if a[4] == 'Pendiente' %}
+
+<span class="badge bg-secondary">Pendiente</span>
+
+{% elif a[4] == 'En progreso' %}
+
+<span class="badge bg-info">En progreso</span>
+
+{% elif a[4] == 'Completado' %}
+
+<span class="badge bg-success">Completado</span>
+
+{% elif a[4] == 'Plazo vencido' %}
+
+<span class="badge bg-danger">Plazo vencido</span>
+
+{% else %}
+
+<span class="badge bg-light text-dark">{{a[4]}}</span>
+
+{% endif %}
+
+</td>
+<td>{{a[5]}}</td>
+<td>{{a[8]}}</td>
+
+<td>
+
+<a href="/edit_activity/{{a[0]}}" 
+class="btn btn-warning btn-sm me-1">
+
+Editar
+
+</a>
+
+<a href="/delete_activity/{{a[0]}}" 
+class="btn btn-danger btn-sm"
+onclick="return confirm('¿Deseas eliminar esta actividad?')">
+
+Eliminar
+
+</a>
+
+</td>
+
+</tr>
+
+{% endfor %}
+
+</table>
+
+{% endblock %}

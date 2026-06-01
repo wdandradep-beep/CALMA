@@ -1,0 +1,63 @@
+{% extends 'base.html' %}
+
+{% block body %}
+
+<h3>Editar actividad</h3>
+
+<form method="POST">
+
+<input class="form-control mb-2"
+name="nombre"
+value="{{actividad[1]}}">
+
+<input class="form-control mb-2"
+name="descripcion"
+value="{{actividad[2]}}">
+
+<select class="form-control mb-2"
+name="estado">
+
+<option>Pendiente</option>
+<option>En progreso</option>
+<option>Completado</option>
+
+</select>
+
+<select class="form-control mb-2"
+name="prioridad">
+
+<option>Alta</option>
+<option>Media</option>
+<option>Baja</option>
+
+</select>
+
+<label>Progreso</label>
+
+<input type="range"
+min="0"
+max="100"
+name="progreso"
+value="{{actividad[7]}}">
+
+<label>Inicio</label>
+
+<input type="date"
+name="fecha_inicio"
+value="{{actividad[8]}}">
+
+<label>Entrega</label>
+
+<input type="date"
+name="fecha_entrega"
+value="{{actividad[9]}}">
+
+<button class="btn btn-warning">
+
+Actualizar
+
+</button>
+
+</form>
+
+{% endblock %}

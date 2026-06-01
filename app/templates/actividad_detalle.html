@@ -1,0 +1,146 @@
+{% extends 'base.html' %}
+
+{% block body %}
+
+
+<h2 class="mb-4">
+{{actividad[1]}}
+</h2>
+
+<div class="card p-4 shadow">
+
+<div class="row">
+
+<div class="col-md-6">
+
+<p class="mb-2">
+<b class="text-info">Materia:</b>
+{{actividad[3]}}
+</p>
+
+<p class="mb-2">
+<b class="text-info">Estado:</b>
+
+{% if actividad[4] == 'Pendiente' %}
+<span class="badge bg-secondary">Pendiente</span>
+
+{% elif actividad[4] == 'En progreso' %}
+<span class="badge bg-info">En progreso</span>
+
+{% elif actividad[4] == 'Completado' %}
+<span class="badge bg-success">Completado</span>
+
+{% elif actividad[4] == 'Plazo vencido' %}
+<span class="badge bg-danger">Plazo vencido</span>
+
+{% else %}
+<span class="badge bg-light text-dark">{{actividad[4]}}</span>
+{% endif %}
+
+</p>
+
+<p class="mb-2">
+<b class="text-info">Prioridad:</b>
+<span class="badge bg-warning text-dark">
+{{actividad[5]}}
+</span>
+</p>
+
+<p class="mb-2">
+<b class="text-info">Progreso:</b>
+{{actividad[6]}} %
+</p>
+
+</div>
+
+<div class="col-md-6">
+
+<p class="mb-2">
+<b class="text-info">Fecha inicio:</b>
+{{actividad[7]}}
+</p>
+
+<p class="mb-2">
+<b class="text-info">Fecha entrega:</b>
+{{actividad[8]}}
+</p>
+
+</div>
+
+</div>
+
+<hr>
+
+<h5>Descripción</h5>
+
+<div class="p-3 rounded"
+style="background:#0b132b; word-break:break-word;">
+{{actividad[2]}}
+</div>
+
+<hr>
+
+<h5>Archivos</h5>
+
+<form method="POST"
+action="/upload/{{actividad[0]}}"
+enctype="multipart/form-data">
+
+<input type="file"
+name="file"
+class="form-control mb-2">
+
+<button class="btn btn-info btn-sm">
+Subir archivo
+</button>
+
+</form>
+
+<br>
+
+{% if files %}
+
+{% for f in files %}
+
+<div class="d-flex justify-content-between align-items-center mb-2">
+
+<div>
+<a href="/static/uploads/{{f[3]}}" target="_blank">
+📎 {{f[2]}}
+</a>
+</div>
+
+<div>
+<a href="/delete_file/{{f[0]}}/{{actividad[0]}}"
+class="btn btn-danger btn-sm">
+Eliminar
+</a>
+</div>
+
+</div>
+
+{% endfor %}
+
+{% else %}
+
+<div class="p-3 rounded bg-dark text-muted">
+(No hay archivos todavía)
+</div>
+
+{% endif %}
+
+<br>
+
+<a href="/edit_activity/{{actividad[0]}}" 
+class="btn btn-warning me-2">
+Editar
+</a>
+
+<a href="/actividades"
+class="btn btn-secondary">
+Volver
+</a>
+
+</div>
+
+{% endblock %}

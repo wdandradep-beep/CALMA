@@ -1,0 +1,30 @@
+{% extends 'base.html' %}
+
+{% block body %}
+
+<h3>Editar materia</h3>
+
+<form method="POST">
+
+<input class="form-control mb-2"
+name="nombre"
+value="{{materia[1]}}">
+
+<input class="form-control mb-2"
+name="descripcion"
+value="{{materia[2]}}">
+
+<input class="form-control mb-2"
+type="color"
+name="color"
+value="{{materia[3]}}">
+
+<button class="btn btn-warning">
+
+Actualizar
+
+</button>
+
+</form>
+
+{% endblock %}

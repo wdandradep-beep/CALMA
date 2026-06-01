@@ -1,0 +1,56 @@
+{% extends 'base.html' %}
+
+{% block body %}
+
+<h3>Usuarios</h3>
+
+<table class="table">
+
+<tr>
+
+<th>Usuario</th>
+
+<th>Email</th>
+
+<th>Rol</th>
+
+<th>Acciones</th>
+
+</tr>
+
+{% for u in users %}
+
+<tr>
+
+<td>{{u[1]}}</td>
+
+<td>{{u[2]}}</td>
+
+<td>{{u[3]}}</td>
+
+<td>
+
+<a href="{{url_for('main.edit_user',id=u[0])}}" 
+class="btn btn-warning btn-sm me-1">
+
+Editar rol
+
+</a>
+
+<a href="{{url_for('main.delete_user',id=u[0])}}" 
+class="btn btn-danger btn-sm"
+onclick="return confirm('¿Eliminar usuario?')">
+
+Eliminar
+
+</a>
+
+</td>
+
+</tr>
+
+{% endfor %}
+
+</table>
+
+{% endblock %}
