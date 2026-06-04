@@ -15,11 +15,15 @@ def create_app():
 
     c.execute("SELECT * FROM users WHERE username='admin'")
     if not c.fetchone():
-        c.execute("INSERT INTO users(username,email,password,role) VALUES(?,?,?,?)",
+        c.executemany(
+    "INSERT INTO users(username,email,password,role) VALUES(?,?,?,?)",
+    [
         ("admin","admin@calma.com",generate_password_hash("admin123"),"admin"),
-        ("will","admin@calma.com",generate_password_hash("will123"),"admin"))
+        ("will","admin@calma.com",generate_password_hash("will123"),"admin")
+    ]
+)
 
-    conn.commit()
+    conn.commit()   
     conn.close()
 
     from .routes import main
